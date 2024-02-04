@@ -1,0 +1,4 @@
+<button type="button" class="btn-close" aria-label="Close" (click)="onNoClick()" ></button>
+<div class="center" *ngIf="data == null">יצירת אישור חדש</div>
+<div class="center" *ngIf="data != null">עריכת אישור - {{carApproval?.id}}</div>
+<app-create-item-approval-car class="form" [item]="data" (getAgainList)="getAgainList()"></app-create-item-approval-car>

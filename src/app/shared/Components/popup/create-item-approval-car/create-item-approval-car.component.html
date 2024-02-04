@@ -1,0 +1,153 @@
+
+<div class="access" *ngIf="access">{{item == null ? 'נשמר במערכת': 'עודכן במערכת'}}
+</div>
+<div *ngIf="errorExist" class="errorExist">
+  לא ניתן ליצור אישור נוסף לאדם זה
+</div>
+<div class="register-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+    <div class="form-group">
+      <label>שם פרטי</label>
+      <input
+        type="text"
+        formControlName="name"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+      />
+      @if (submitted && f['name'].errors) {
+      <div class="invalid-feedback">
+        @if (f['name'].errors['required']) {
+        <div>שם שדה חובה</div>
+        }
+        @if (f['name'].errors['hebrewInvalid'] && f['name'].value != '') {
+          <div>שם רק בעברית</div>
+          }
+          @if (f['name'].errors['minlength'] && f['name'].value != '') {
+            <div>חייב לכל הפחות 2 אותיות</div>
+            }
+
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>שם משפחה</label>
+      <input
+        type="text"
+        formControlName="lastName"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+      />
+      @if (submitted && f['lastName'].errors) {
+      <div class="invalid-feedback">
+        @if (f['lastName'].errors['required']) {
+        <div>שם משפחה שדה חובה</div>
+        }
+
+        @if (f['lastName'].errors['hebrewInvalid'] && f['lastName'].value != '') {
+          <div>שם משפחה רק בעברית</div>
+          }
+          @if (f['lastName'].errors['minlength'] && f['name'].value != '') {
+            <div>חייב לכל הפחות 2 אותיות</div>
+            }
+
+
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>תפקיד בחברה</label>
+      <select class="custom-select"  formControlName="role"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['role'].errors }">
+        <option value="">בחר תפקיד</option>
+        <option *ngFor="let role of roleLIst" [ngValue]="role">{{role}}</option>
+      </select>
+      @if (submitted && f['role'].errors) {
+      <div class="invalid-feedback">
+        @if (f['role'].errors['required']) {
+        <div>חובת בחירת תפקיד</div>
+        }
+
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>מחלקה</label>
+      <select class="custom-select" formControlName="department" class="form-control"
+      [ngClass]="{ 'is-invalid': submitted && f['department'].errors }">
+        <option value="">בחר מחלקה</option>
+        <option *ngFor="let department of departmentLIst" [ngValue]="department">{{department}}</option>
+      </select>
+
+
+
+      @if (submitted && f['department'].errors) {
+      <div class="invalid-feedback">
+        @if (f['department'].errors['required']) {
+        <div>חובת בחירת מחלקה</div>
+        }
+		@if (f['department'].errors['required']) {
+        <div>>חובת בחירת מחלקה</div>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>גיל</label>
+      <input
+        type="age"
+        type="number"
+        maxlength="2"
+        formControlName="age"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['age'].errors }"
+      />
+      @if (submitted && f['age'].errors) {
+      <div class="invalid-feedback">
+        @if (f['age'].errors['required']) {
+        <div>גיל שדה חובה</div>
+        }
+        @if (f['age'].errors['min']) {
+          <div>המספר המאופשר הוא בן 18 - 99</div>
+          }
+          @if (f['age'].errors['max']) {
+            <div>המספר המאופשר הוא בן 18 - 99</div>
+            }
+
+      </div>
+      }
+    </div>
+
+
+
+    <div class="form-group form-check">
+      <input
+        type="checkbox"
+        formControlName="carCompony"
+        class="form-check-input"
+
+      />
+      <label for="carCompony" class="form-check-label">
+       <div class="checkBocText"> האם יש לו רכב חברה</div>
+      </label>
+
+    </div>
+
+    <div class="form-group event">
+      <button type="submit" class="btn btn-primary">{{item == null ? 'שמירה'  : 'עדכון' }}</button>
+      <button
+        type="button"
+        (click)="onReset()"
+        class="btn btn-warning float-right"
+      >
+        נקה
+      </button>
+    </div>
+  </form>
+</div>

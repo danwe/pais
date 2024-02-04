@@ -1,0 +1,5 @@
+<app-add-aprov-car  (getListAgain)="getListAgain()"></app-add-aprov-car>
+<div *ngIf="listCarApproval != []">
+  <app-list-car-approval [listCarApproval]="listCarApproval" (getListAgain)="getListAgain()" app-list-car-approval ></app-list-car-approval>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource"  matSort (matSortChange)="announceSortChange($event)">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="חיפוש לפי מזהה"> מזהה</th>
+      <td mat-cell *matCellDef="let element">  <button mat-button color="primary" (click)="onClickId(element)">{{element.id}}</button> </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="חיפוש לפי שם"> שם </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="חיפוש לפי  שם משפחה"> שם משפחה </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="חיפוש לפי גיל"> גיל </th>
+      <td mat-cell *matCellDef="let element">
+        <div [ngSwitch]="true">
+          <div *ngSwitchCase="element.age < 25 && element.age > 18">
+            18-25
+          </div>
+          <div *ngSwitchCase="element.age < 40 && element.age > 35">
+            25-40
+          </div>
+          <div *ngSwitchCase="element.age < 60 && element.age > 40">
+            40-60
+          </div>
+          <div *ngSwitchCase="element.age < 80 && element.age > 60">
+            40-60
+          </div>
+          <div *ngSwitchCase="element.age < 99 && element.age > 80">
+            80-99
+          </div>
+          <div *ngSwitchDefault>
+           error age
+          </div>
+        </div> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="חיפוש לפי מחלקה"> מחלקה </th>
+      <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="חיפוש לפי תפקיד"> תפקיד </th>
+      <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+    </ng-container>
+    <ng-container matColumnDef="carCompony">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header sortActionDescription="חיפוש לפי רכב חברה"> רכב חברה </th>
+      <td  ngmat-cell *matCellDef="let element">
+        <mat-icon *ngIf="element.carCompony != true" aria-hidden="false" aria-label="Example home close" fontIcon="close"></mat-icon>
+        <mat-icon *ngIf="element.carCompony == true" aria-hidden="false" aria-label="Example home done" fontIcon="done"></mat-icon>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5]"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements">
+</mat-paginator>
+
+</div>
