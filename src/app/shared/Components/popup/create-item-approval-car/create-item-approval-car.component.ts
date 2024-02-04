@@ -119,14 +119,11 @@ export class CreateItemApprovalCarComponent {
 
         }
         if (value.name === this.form.value.name && value.lastName === this.form.value.lastName && this.item != null && this.item.id != value.id) {
-          console.log(this.item)
-          console.log(value)
           this.errorExist = true;
 
         }
       });
       setTimeout(() => {
-        console.log('First function executed.');
         resolve();
       }, 1000); // Adjust the timeout based on your needs
     });
@@ -140,7 +137,6 @@ export class CreateItemApprovalCarComponent {
       if (this.item == null) {
         this.carApprovalService.addItems(this.carApprovalNew).subscribe((data: any) => {
           this.access = true;
-            console.log(data);
             setTimeout(()=>{                           //<<<---using ()=> syntax
               this.access = false;
               this.getAgainList.emit();
@@ -150,7 +146,6 @@ export class CreateItemApprovalCarComponent {
       else {
         this.carApprovalNew.id = this.item.id;
         this.carApprovalService.editItems(this.carApprovalNew).subscribe((data: any) => {
-            console.log(data);
             this.access = true;
             setTimeout(()=>{                           //<<<---using ()=> syntax
               this.getAgainList.emit();
@@ -159,12 +154,9 @@ export class CreateItemApprovalCarComponent {
       }
     }
       setTimeout(() => {
-        console.log('Second function executed.');
         resolve();
       }, 1000); // Adjust the timeout based on your needs
     });
-
-    console.log(JSON.stringify(this.form.value, null, 2));
   }
 
   onReset(): void {
